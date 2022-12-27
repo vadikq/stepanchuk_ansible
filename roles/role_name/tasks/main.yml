@@ -1,0 +1,16 @@
+  - name: Remove vim
+    apt:
+      name: 'vim'
+      state: 'absent'
+  - name: Install vim
+    apt:
+      name: 'vim'
+      state: 'latest'
+  - name: Copy test file
+    template:
+      src: 'files/file.j2'
+      dest: '/tmp/file'
+      owner: 'root'
+      group: 'root'
+      mode: '0644'
+
