@@ -1,0 +1,10 @@
+---
+- name: Install mysql client for db_servers
+  hosts:
+    - all_servers
+  gather_facts: yes
+  tasks:
+  - name: Install mysql client
+    apt:
+      name: "{{ db_server_package }}"
+      state: 'present'
