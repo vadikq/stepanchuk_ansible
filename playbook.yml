@@ -1,8 +1,21 @@
 ---
-- name: Playbook for using roles.
+- name: Basic setup servers
   hosts:
     - all_servers
   become: yes
+  gather_facts: yes
   roles:
-    - nginx
-    - vim
+    - basic
+    - hosts
+    - user
+    - zabbix
+  vars:
+    user:
+      admin: 'super-admin'
+      full_name: 'Admin DC'
+    zabbix:
+      agent:
+        host: '10.1.1.10'
+        server_url: 'https://zabbix.local.wbstraining.de'
+        login_user: 'Admin'
+        login_password: 'zabbix'

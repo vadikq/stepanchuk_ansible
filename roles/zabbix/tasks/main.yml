@@ -1,0 +1,28 @@
+---
+- name: Add zabbix repository GPG key
+  apt_key:
+    url: https://repo.zabbix.com/zabbix-official-repo.key
+
+- name: Configure zabbix repository
+  apt_repository:
+    repo: "deb http://repo.zabbix.com/zabbix/5.2/ubuntu/ {{ ansible_distribution_release }} main"
+    state: present
+    filename: zabbix-server
+    update_cache: false
+  notify:
+    - Update APT cache
+
+- name: Force handlers
+  meta: flush_handlers
+
+- name: Install zabbix-agent
+  apt:
+    name: [ 'zabbix-agent', 'zabbix-sender' ]
+    state: present
+
+- name: Ensure zabbix-agent.config file is present
+  template:
+    src: 'templates/zabbix_agentd.conf.j2'
+    dest: '/etc/zabbix/zabbix_agentd.conf'
+  notify:
+    - Restart zabbix agent

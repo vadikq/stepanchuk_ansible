@@ -1,0 +1,6 @@
+---
+- name: Add user {{ user.admin }}
+  user:
+    name: "{{ user.admin }}"
+    comment: "{{ user.full_name }}"
+    shell: '/bin/bash'

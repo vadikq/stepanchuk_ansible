@@ -1,2 +1,12 @@
 ---
 db_server_package: 'mysql'
+extra:
+  hosts:
+    blocks:
+      - name: 'web servers'
+        pairs:
+          - { ip: '10.1.0.13', names: [ 'web' ] }
+      - name: 'db servers'
+        pairs:
+          - { ip: '10.1.0.11', names: [ 'db1' ] }
+          - { ip: '10.1.0.12', names: [ 'db2' ] }

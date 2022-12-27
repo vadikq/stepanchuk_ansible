@@ -1,0 +1,19 @@
+---
+- name: Ensure host dict present
+  set_fact:
+    host_file: { blocks: [] }
+  when:
+    - host_file is not defined
+
+- name: Merge extra host_file records
+  set_fact:
+    host_file: "{{ host_file | combine( { 'blocks': host_file.blocks + extra.hosts.blocks }) }}"
+  with_items:
+    - "{{ host_file }}"
+
+- name: Ensure host_file file present
+  template:
+    src: 'templates/hosts.j2'
+    dest: '/etc/hosts'
+    mode: '0644'
+    owner: 'root'

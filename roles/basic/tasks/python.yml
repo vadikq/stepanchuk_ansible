@@ -1,0 +1,7 @@
+---
+- name: Install python-is-python3 apt package
+  apt:
+    name: [ python-is-python3 ]
+    state: present
+  when:
+    - ansible_distribution_version == '16.04' or ansible_distribution_version == '18.04'

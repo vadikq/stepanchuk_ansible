@@ -1,0 +1,18 @@
+---
+- name: Update APT cache
+  apt:
+    update_cache: yes
+
+- name: Install packages
+  apt:
+    name: "{{ basic_packages }}"
+    state: present
+
+- name: Include ntp tasks
+  include: ntp.yml
+
+- name: Include locale tasks
+  include: locale.yml
+
+- name: Include python tasks
+  include: python.yml

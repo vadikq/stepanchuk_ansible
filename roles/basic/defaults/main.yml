@@ -1,0 +1,12 @@
+---
+basic_packages:
+  - apt-transport-https
+  - dnsutils
+  - htop
+  - iotop
+  - mc
+  - net-tools
+  - python3
+  - python3-apt
+  - vim
+basic_timezone: "Etc/UTC"

@@ -1,0 +1,10 @@
+---
+- name: Update APT cache
+  apt:
+    update_cache: true
+
+- name: Restart zabbix agent
+  systemd:
+    name: 'zabbix-agent'
+    state: restarted
+    enabled: true
