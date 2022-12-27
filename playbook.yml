@@ -1,0 +1,8 @@
+---
+- name: Playbook for using roles.
+  hosts:
+    - localhost
+  become: yes
+  roles:
+    - nginx
+    - vim

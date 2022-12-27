@@ -1,0 +1,40 @@
+---
+- name: Setup apache for Demo
+  hosts:
+    - ansible
+  gather_facts: true
+  become: true
+  pre_tasks:
+    - name: Update apt cache if needed.
+      apt:
+        update_cache: true
+        cache_valid_time: '3600'
+  tasks:
+  - name: Ensure nginx is installed.
+    apt:
+      name: nginx
+      state: present
+
+  - name: Ensure nginx is running.
+    service:
+      name: nginx
+      state: started
+      enabled: yes
+
+  - name: Remove vim
+    apt:
+      name: 'vim'
+      state: 'absent'
+
+  - name: Install vim
+    apt:
+      name: 'vim'
+      state: 'latest'
+
+  - name: Copy test file
+    template:
+      src: 'files/file.j2'
+      dest: '/tmp/file'
+      owner: 'root'
+      group: 'root'
+      mode: '0644'
